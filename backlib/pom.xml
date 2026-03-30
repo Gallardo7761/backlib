@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>backlib</artifactId>
 	<groupId>net.miarma</groupId>
-	<version>1.1.1</version>
+	<version>1.1.2</version>
 
 	<properties>
 		<java.version>25</java.version>
