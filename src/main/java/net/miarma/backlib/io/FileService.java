@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 @Service
 public class FileService {
@@ -22,11 +23,20 @@ public class FileService {
             if (!Files.exists(root)) Files.createDirectories(root);
 
             String filename = file.getOriginalFilename() != null ? file.getOriginalFilename() : "file_" + System.currentTimeMillis();
-            Files.copy(file.getInputStream(), root.resolve(filename));
+            Files.copy(file.getInputStream(), root.resolve(filename), StandardCopyOption.REPLACE_EXISTING);
 
             return filename;
         } catch (IOException e) {
             throw new RuntimeException("Error guardando fichero: ", e);
+        }
+    }
+
+    public void delete(String filename) {
+        try {
+            Path file = Paths.get(uploadPath).resolve(filename);
+            Files.deleteIfExists(file);
+        } catch (IOException e) {
+            throw new RuntimeException("No se pudo borrar el fichero: " + filename, e);
         }
     }
 }
