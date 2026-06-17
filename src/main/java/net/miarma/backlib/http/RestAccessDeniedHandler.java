@@ -3,6 +3,7 @@ package net.miarma.backlib.http;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import net.miarma.backlib.dto.ApiErrorDto;
+import org.jspecify.annotations.NonNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
@@ -15,7 +16,7 @@ public class RestAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response,
-                       AccessDeniedException accessDeniedException) throws IOException {
+                       @NonNull AccessDeniedException accessDeniedException) throws IOException {
 
         ApiErrorDto error = new ApiErrorDto(
                 HttpStatus.FORBIDDEN.value(),
